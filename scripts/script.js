@@ -1,11 +1,10 @@
-var ListItem = /** @class */ (function () {
-    function ListItem(id, title, description) {
-        this.id;
-        this.title;
-        this.description;
+var ToDo = /** @class */ (function () {
+    function ToDo() {
+        this.list = [];
     }
-    ListItem.prototype.test = function () { console.log('ciao'); };
-    return ListItem;
+    ToDo.prototype.addItem = function (item) { this.list.push(item); return this; };
+    return ToDo;
 }());
-var listItem = new ListItem(2, '', '');
-listItem.test();
+// let toDo = new ToDo();
+// toDo.
+// console.log(.push())
