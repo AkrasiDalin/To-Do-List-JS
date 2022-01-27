@@ -10,10 +10,6 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 var ToDo = /** @class */ (function () {
     function ToDo() {
         this.list = [];
-        // render(id: string) {
-        //     let listHTML = '';
-        //     if()
-        // }
     }
     ToDo.prototype.getList = function () { return __spreadArray([], this.list, true); };
     ToDo.prototype.clearList = function () { this.list = []; };
@@ -33,10 +29,25 @@ var ToDo = /** @class */ (function () {
         }
         return this;
     };
+    ToDo.prototype.generateListItem = function (el) {
+        return "<li>\n    <div id='".concat(el.id, "'>\n      <div class='item-body'>\n        <div class='title'>").concat(el.title, "</div>\n        <div class='expire'>").concat(el.date_expire, "</div>\n        <div class='description'>").concat(el.description, "</div>\n      </div>\n      <div class='item-options'>\n        <div class='edit'>ED</div>\n        <div class='remove'>REM</div>\n      </div>\n    </div>\n    </li>");
+    };
+    ToDo.prototype.render = function (id) {
+        var _this = this;
+        this.list.forEach(function (el) {
+            if (id) {
+                document.querySelector("#".concat(id)).innerHTML += _this.generateListItem(el);
+            }
+        });
+    };
     return ToDo;
 }());
 var toDo = new ToDo();
-[{ id: 1, title: 'ciao1' }, { id: 2, title: 'ciao2' }, { id: 3, title: 'ciao3' }].map(function (item) { return toDo.addItem(item); });
-toDo.removeItem(2);
-console.log(toDo.getList());
+[{ id: '1', title: 'ciao1', description: 'hello1', date_created: '1020/21', date_expire: '23/32/43' },
+    { id: '2', title: 'ciao2', description: 'hello2', date_created: '1020/21', date_expire: '23/32/43' },
+    { id: '3', title: 'ciao3', description: 'hello3', date_created: '1020/21', date_expire: '23/32/43' },
+    { id: '4', title: 'ciao4', description: 'hello4', date_created: '1020/21', date_expire: '23/32/43' },
+].forEach(function (item) { return toDo.addItem(item); });
+// toDo.removeItem(2);
+toDo.render('to-do-list');
 // console.log(.push())
