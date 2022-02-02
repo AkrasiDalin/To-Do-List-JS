@@ -13,7 +13,7 @@
   },
   "scripts": {
     "go-lint": "./node_modules/.bin/eslint",
-    "watch-tailwind": "npx tailwindcss -i ./css/input.css -o ./css/style.css --watch;",
+    "watch-tailwind": "npx tailwindcss -i ./css/input.css -o ./css/output.css --watch;",
     "watch-ts": "npx tsc ./scripts/application/app.ts --out ./scripts/script.js --watch --lib es2015,dom"
   }
 }

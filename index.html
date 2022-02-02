@@ -5,10 +5,64 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./css/output.css">
     <link rel="stylesheet" href="./css/style.css">
     <script type="text/javascript" src="./scripts/script.js" defer></script>
 </head>
 <body>
-    <ul id="to-do-list"></ul>
+    <div class="absolute bg-gradient-to-r from-cyan-500 to-blue-500 h-screen w-screen flex items-center justify-center">
+        <div class="">
+            <div class="bg-gray-100/50 h-144 w-108 p-2 ">
+                <input type="text" id="search" class="w-full h-10 mb-2 p-5"/>
+                
+                <div id="to-do" class="items-center justify-center grid bg-green-100/50 ">
+                    
+                    <ul id="to-do-list" class="p-2 h-128 overflow-y-scroll"></ul>
+                </div>
+            </div>
+            
+            <div class="relative flex justify-center items-center w-full">
+                <button id="add-btn" class="top-5 rounded-full absolute text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600" type="button" data-modal-toggle="popup-modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                </button>
+            
+                <div class="fixed hidden inset-0 bg-gray-600 bg-opacity-30 h-full w-full" id="overlay"></div>
+               
+                <div class="absolute hidden w-96 left-6 -top-80 drop-shadow-md" id="popup-modal">
+                    <div class="relative px-3 w-full max-w-md h-full md:h-auto">
+                        
+                        <div class="relative bg-white rounded-lg  dark:bg-gray-200">
+                            <div class="p-6 text-center h-64">
+                                <input type="text" class=" w-full px-3 py-1.5 text-gray-600 mb-3 focus:text-gray-700 focus:bg-white focus:outline-none"
+                                    id="modal-title"
+                                    placeholder="Enter title here"/>
+                                <textarea
+                                    class="mb-3 w-full px-3 py-1.5 text-gray-600 bg-white rounded focus:outline-none"
+                                    id="modal-description" rows="3" placeholder="Add more details here"></textarea>
+                                <input type="text" class=" w-full px-3 py-1.5 text-gray-600 mb-3 focus:text-gray-700 focus:bg-white focus:outline-none"
+                                    id="modal-date"
+                                    placeholder="Let's pick a deadline"/>
+                            </div>
+
+                            <div class="text-center grid grid-cols-2 h-14" id="button-container" >
+                                <div id="modal-cancel" class="flex justify-center text-red-600 bg-white font-medium  text-sm items-center px-5 py-2.5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 absolute bottom-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </div>
+                                <div id="modal-accept" class="flex justify-center text-green-600 bg-white font-medium  text-sm items-center px-5 py-2.5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 absolute bottom-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
