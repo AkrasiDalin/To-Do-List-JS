@@ -7,7 +7,13 @@ interface ListItem {
 }
 
 class ToDo {
-  private list: ListItem[] = [];
+  private list: ListItem[] = [{
+    id: 'x',
+    title: 'GETTING STARTED',
+    description: 'Click on the "+" button at the bottom of the screen to add a new item.',
+    date_created: 'Date created',
+    date_expire: 'Some day',
+  }];
 
   private searchID:string = '';
 
@@ -15,21 +21,22 @@ class ToDo {
 
   private idCount:number = 0;
 
-  constructor(searchID:string, toDoListID:string) {
+  constructor(searchID:string, toDoListID:string, popUpModal) {
     const searchObj = (<HTMLInputElement>document.getElementById(`${searchID}`));
     const toDoListhObj = (<HTMLInputElement>document.getElementById(`${toDoListID}`));
-    const modal = (<HTMLInputElement>document.getElementById("popup-modal"));
-    const overlay = (<HTMLInputElement>document.getElementById("overlay"));
 
-    const btnAdd = (<HTMLInputElement>document.getElementById("add-btn"));
+    const modal = (<HTMLInputElement>document.getElementById(`${popUpModal.modalID}`));
+    const overlay = (<HTMLInputElement>document.getElementById(`${popUpModal.overlayID}`));
 
-    const modalTitle = (<HTMLInputElement>document.getElementById("modal-title"));
-    const modalDescription = (<HTMLInputElement>document.getElementById("modal-description"));
-    const modalDate = (<HTMLInputElement>document.getElementById("modal-date"));
+    const btnAdd = (<HTMLInputElement>document.getElementById(`${popUpModal.addBtnID}`));
 
-    const btnAccept = (<HTMLInputElement>document.getElementById("modal-accept"));
-    const btnCancel = (<HTMLInputElement>document.getElementById("modal-cancel"));
-    
+    const modalTitle = (<HTMLInputElement>document.getElementById(`${popUpModal.modalTitleID}`));
+    const modalDescription = (<HTMLInputElement>document.getElementById(`${popUpModal.modalDescriptionID}`));
+    const modalDate = (<HTMLInputElement>document.getElementById(`${popUpModal.modalDateID}`));
+
+    const btnAccept = (<HTMLInputElement>document.getElementById(`${popUpModal.modalAcceptID}`));
+    const btnCancel = (<HTMLInputElement>document.getElementById(`${popUpModal.modalCancelID}`));
+
     if (searchObj) {
       const toDo = this;
       searchObj.addEventListener('keyup', (el) => { toDo.processSearch(searchObj.value); });
@@ -40,13 +47,12 @@ class ToDo {
     // }
     if (btnAdd) {
       const toDo = this;
-      btnAdd.addEventListener('click', (el) => { modal.classList.remove("hidden"); overlay.classList.remove("hidden"); });
+      btnAdd.addEventListener('click', (el) => { modal.classList.remove('hidden'); overlay.classList.remove('hidden'); });
     }
     if (btnAccept) {
-      const toDo = this;
-      btnAccept.addEventListener('click', (el) => { 
-        modal.classList.add("hidden");
-        overlay.classList.add("hidden");
+      btnAccept.addEventListener('click', (el) => {
+        modal.classList.add('hidden');
+        overlay.classList.add('hidden');
         console.log(`TITLE:${modalTitle.value}, DESCR:${modalDescription.value}, DATE:${modalDate.value}, `);
         this.renderSingle({
           id: `${this.idCount}`, title: `${modalTitle.value}`, description: `${modalDescription.value}`, date_created: '1020/21', date_expire: `${modalDate.value}`,
@@ -56,7 +62,7 @@ class ToDo {
     }
     if (btnCancel) {
       const toDo = this;
-      btnCancel.addEventListener('click', (el) => { modal.classList.add("hidden"); overlay.classList.add("hidden");});
+      btnCancel.addEventListener('click', (el) => { modal.classList.add('hidden'); overlay.classList.add('hidden'); });
     }
     this.searchID = searchID;
     this.toDoListID = toDoListID;
@@ -109,7 +115,7 @@ class ToDo {
   renderSingle(item:ListItem, toDoListID: string = this.toDoListID) {
     if (item) {
       document.querySelector(`#${toDoListID}`).innerHTML += this.generateListItem(item);
-    };
+    }
   }
 
   renderAll(list:ListItem[] = this.list, toDoListID: string = this.toDoListID) {
@@ -139,7 +145,16 @@ class ToDo {
   };
 }
 
-const toDo = new ToDo('search', 'to-do-list');
+const toDo = new ToDo('search', 'to-do-list', {
+  modalID: 'popup-modal',
+  overlayID: 'overlay',
+  addBtnID: 'add-btn',
+  modalTitleID: 'modal-title',
+  modalDescriptionID: 'modal-description',
+  modalDateID: 'modal-date',
+  modalAcceptID: 'modal-accept',
+  modalCancelID: 'modal-cancel',
+});
 
 // toDo.removeItem(2);
 toDo.renderAll();

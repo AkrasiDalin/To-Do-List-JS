@@ -8,9 +8,15 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     return to.concat(ar || Array.prototype.slice.call(from));
 };
 var ToDo = /** @class */ (function () {
-    function ToDo(searchID, toDoListID) {
+    function ToDo(searchID, toDoListID, popUpModal) {
         var _this = this;
-        this.list = [];
+        this.list = [{
+                id: 'x',
+                title: 'GETTING STARTED',
+                description: 'Click on the "+" button at the bottom of the screen to add a new item.',
+                date_created: 'Date created',
+                date_expire: 'Some day'
+            }];
         this.searchID = '';
         this.toDoListID = '';
         this.idCount = 0;
@@ -34,14 +40,14 @@ var ToDo = /** @class */ (function () {
         };
         var searchObj = document.getElementById("".concat(searchID));
         var toDoListhObj = document.getElementById("".concat(toDoListID));
-        var modal = document.getElementById("popup-modal");
-        var overlay = document.getElementById("overlay");
-        var btnAdd = document.getElementById("add-btn");
-        var modalTitle = document.getElementById("modal-title");
-        var modalDescription = document.getElementById("modal-description");
-        var modalDate = document.getElementById("modal-date");
-        var btnAccept = document.getElementById("modal-accept");
-        var btnCancel = document.getElementById("modal-cancel");
+        var modal = document.getElementById("".concat(popUpModal.modalID));
+        var overlay = document.getElementById("".concat(popUpModal.overlayID));
+        var btnAdd = document.getElementById("".concat(popUpModal.addBtnID));
+        var modalTitle = document.getElementById("".concat(popUpModal.modalTitleID));
+        var modalDescription = document.getElementById("".concat(popUpModal.modalDescriptionID));
+        var modalDate = document.getElementById("".concat(popUpModal.modalDateID));
+        var btnAccept = document.getElementById("".concat(popUpModal.modalAcceptID));
+        var btnCancel = document.getElementById("".concat(popUpModal.modalCancelID));
         if (searchObj) {
             var toDo_1 = this;
             searchObj.addEventListener('keyup', function (el) { toDo_1.processSearch(searchObj.value); });
@@ -52,13 +58,12 @@ var ToDo = /** @class */ (function () {
         // }
         if (btnAdd) {
             var toDo_2 = this;
-            btnAdd.addEventListener('click', function (el) { modal.classList.remove("hidden"); overlay.classList.remove("hidden"); });
+            btnAdd.addEventListener('click', function (el) { modal.classList.remove('hidden'); overlay.classList.remove('hidden'); });
         }
         if (btnAccept) {
-            var toDo_3 = this;
             btnAccept.addEventListener('click', function (el) {
-                modal.classList.add("hidden");
-                overlay.classList.add("hidden");
+                modal.classList.add('hidden');
+                overlay.classList.add('hidden');
                 console.log("TITLE:".concat(modalTitle.value, ", DESCR:").concat(modalDescription.value, ", DATE:").concat(modalDate.value, ", "));
                 _this.renderSingle({
                     id: "".concat(_this.idCount), title: "".concat(modalTitle.value), description: "".concat(modalDescription.value), date_created: '1020/21', date_expire: "".concat(modalDate.value)
@@ -67,8 +72,8 @@ var ToDo = /** @class */ (function () {
             });
         }
         if (btnCancel) {
-            var toDo_4 = this;
-            btnCancel.addEventListener('click', function (el) { modal.classList.add("hidden"); overlay.classList.add("hidden"); });
+            var toDo_3 = this;
+            btnCancel.addEventListener('click', function (el) { modal.classList.add('hidden'); overlay.classList.add('hidden'); });
         }
         this.searchID = searchID;
         this.toDoListID = toDoListID;
@@ -99,7 +104,6 @@ var ToDo = /** @class */ (function () {
         if (item) {
             document.querySelector("#".concat(toDoListID)).innerHTML += this.generateListItem(item);
         }
-        ;
     };
     ToDo.prototype.renderAll = function (list, toDoListID) {
         var _this = this;
@@ -111,7 +115,16 @@ var ToDo = /** @class */ (function () {
     };
     return ToDo;
 }());
-var toDo = new ToDo('search', 'to-do-list');
+var toDo = new ToDo('search', 'to-do-list', {
+    modalID: 'popup-modal',
+    overlayID: 'overlay',
+    addBtnID: 'add-btn',
+    modalTitleID: 'modal-title',
+    modalDescriptionID: 'modal-description',
+    modalDateID: 'modal-date',
+    modalAcceptID: 'modal-accept',
+    modalCancelID: 'modal-cancel'
+});
 // toDo.removeItem(2);
 toDo.renderAll();
 // toDo.processSearch('ber');
