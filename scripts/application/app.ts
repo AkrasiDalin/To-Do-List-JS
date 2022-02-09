@@ -1,10 +1,4 @@
-interface ListItem {
-  id: string,
-  title: string,
-  description: string,
-  date_created: string,
-  date_expire: string,
-}
+import ListItem from './components/ListItem';
 
 class ToDo {
   private list: ListItem[] = [{
@@ -21,7 +15,7 @@ class ToDo {
 
   private idCount:number = 0;
 
-  constructor(searchID:string, toDoListID:string, popUpModal) {
+  constructor(searchID:string, toDoListID:string, popUpModal:object) {
     const searchObj = (<HTMLInputElement>document.getElementById(`${searchID}`));
     const toDoListhObj = (<HTMLInputElement>document.getElementById(`${toDoListID}`));
 
