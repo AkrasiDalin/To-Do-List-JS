@@ -15,6 +15,11 @@ input {
 #to-do-list {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+
+  -webkit-user-select: none; /* Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 }
 
 .overlay::before {
@@ -76,4 +81,41 @@ textarea {
   border-right: 0 solid transparent;
   border-left: 180px solid transparent;
   border-bottom: 30px solid white;
+}
+
+.item-options {
+  /* border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  overflow: hidden; */
+  position: relative;
+}
+
+.item-options div {
+  height: 50%;
+  width: 100%;
+}
+
+.item-options .edit, .item-options .remove {
+  width: 25px;
+  cursor: pointer;
+}
+
+.item-options .edit path {
+  width: 20px;
+  fill:#0092ff78;
+}
+
+.item-options .edit:hover path {
+  width: 20px;
+  fill:#0092ffc4;
+}
+
+.item-options .remove path {
+  width: 20px;
+  fill:#ff000078;
+}
+
+.item-options .remove:hover path {
+  width: 20px;
+  fill:#ff0000bd;
 }
