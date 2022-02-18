@@ -96,8 +96,7 @@ textarea {
 }
 
 .item-options .edit, .item-options .remove {
-  width: 25px;
-  cursor: pointer;
+  width: 20px;
 }
 
 .item-options .edit path {
