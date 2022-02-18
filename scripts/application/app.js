@@ -35,8 +35,6 @@ var ToDo = /** @class */ (function () {
                         found.push(el);
                     }
                 });
-                // if(found.length > 0) {
-                // }
             }
             document.querySelector("#".concat(_this.toDoListID)).innerHTML = '';
             var render = found.length > 0 ? found : _this.list;
@@ -56,26 +54,25 @@ var ToDo = /** @class */ (function () {
         this.btnCancel = (document.getElementById("".concat(popUpModal.modalCancelID)));
         if (this.searchObj) {
             var toDo_1 = this;
-            this.searchObj.addEventListener('keyup', function (el) {
+            this.searchObj.addEventListener('keyup', function () {
                 toDo_1.processSearch(_this.searchObj.value);
             });
         }
         // if (toDoListhObj) {
         //   const toDo = this;
-        //   searchObj.addEventListener('keyup', (el) => { toDo.processSearch(searchObj.value); });
+        //   searchObj.addEventListener('keyup', () => { toDo.processSearch(searchObj.value); });
         // }
         if (this.btnAdd) {
-            var toDo_2 = this;
-            this.btnAdd.addEventListener('click', function (el) {
+            this.btnAdd.addEventListener('click', function () {
                 _this.modal.classList.remove('hidden');
                 _this.overlay.classList.remove('hidden');
             });
         }
         if (this.btnAccept) {
-            this.btnAccept.addEventListener('click', function (el) {
+            this.btnAccept.addEventListener('click', function () {
                 _this.modal.classList.add('hidden');
                 _this.overlay.classList.add('hidden');
-                console.log("TITLE:".concat(_this.modalTitle.value, ", DESCR:").concat(_this.modalDescription.value, ", DATE:").concat(_this.modalDate.value, ", "));
+                console.log("TITLE:".concat(_this.modalTitle.value, ", DESCR:").concat(_this.modalDescription.value, ", DATE:").concat(_this.modalDate.value));
                 var item = {
                     id: "".concat(_this.idCount),
                     title: "".concat(_this.modalTitle.value.trim()),
@@ -92,8 +89,7 @@ var ToDo = /** @class */ (function () {
             });
         }
         if (this.btnCancel) {
-            var toDo_3 = this;
-            this.btnCancel.addEventListener('click', function (el) {
+            this.btnCancel.addEventListener('click', function () {
                 _this.modal.classList.add('hidden');
                 _this.overlay.classList.add('hidden');
             });
@@ -157,7 +153,4 @@ var toDo = new ToDo('search', 'to-do-list', {
     modalAcceptID: 'modal-accept',
     modalCancelID: 'modal-cancel'
 });
-// toDo.removeItem(2);
 toDo.renderAll();
-// toDo.processSearch('ber');
-// console.log(.push())

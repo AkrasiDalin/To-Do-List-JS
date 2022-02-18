@@ -77,28 +77,27 @@ class ToDo {
 
     if (this.searchObj) {
       const toDo = this;
-      this.searchObj.addEventListener('keyup', (el) => {
+      this.searchObj.addEventListener('keyup', () => {
         toDo.processSearch(this.searchObj.value);
       });
     }
     // if (toDoListhObj) {
     //   const toDo = this;
-    //   searchObj.addEventListener('keyup', (el) => { toDo.processSearch(searchObj.value); });
+    //   searchObj.addEventListener('keyup', () => { toDo.processSearch(searchObj.value); });
     // }
     if (this.btnAdd) {
-      const toDo = this;
-      this.btnAdd.addEventListener('click', (el) => {
+      this.btnAdd.addEventListener('click', () => {
         this.modal.classList.remove('hidden');
         this.overlay.classList.remove('hidden');
       });
     }
     if (this.btnAccept) {
-      this.btnAccept.addEventListener('click', (el) => {
+      this.btnAccept.addEventListener('click', () => {
         this.modal.classList.add('hidden');
         this.overlay.classList.add('hidden');
 
         console.log(
-          `TITLE:${this.modalTitle.value}, DESCR:${this.modalDescription.value}, DATE:${this.modalDate.value}, `
+          `TITLE:${this.modalTitle.value}, DESCR:${this.modalDescription.value}, DATE:${this.modalDate.value}`
         );
 
         const item = {
@@ -120,8 +119,7 @@ class ToDo {
       });
     }
     if (this.btnCancel) {
-      const toDo = this;
-      this.btnCancel.addEventListener('click', (el) => {
+      this.btnCancel.addEventListener('click', () => {
         this.modal.classList.add('hidden');
         this.overlay.classList.add('hidden');
       });
@@ -185,14 +183,11 @@ class ToDo {
 
   renderSingle(item: ListItem, toDoListID: string = this.toDoListID) {
     if (item) {
-      document.querySelector(`#${toDoListID}`).innerHTML += this.generateListItem(item);
+      (<HTMLElement> document.querySelector(`#${toDoListID}`)).innerHTML += this.generateListItem(item);
     }
   }
 
-  renderAll(
-    list: ListItem[] = this.list,
-    toDoListID: string = this.toDoListID
-  ) {
+  renderAll(list: ListItem[] = this.list, toDoListID: string = this.toDoListID) {
     list.forEach((item: ListItem) => {
       this.renderSingle(item, toDoListID);
     });
@@ -200,6 +195,7 @@ class ToDo {
 
   processSearch = (title: string) => {
     const found: ListItem[] = [];
+
     console.log('search for:', title, 'inside of:', this.list);
     if (title) {
       this.list.forEach((el: ListItem) => {
@@ -209,11 +205,9 @@ class ToDo {
           found.push(el);
         }
       });
-      // if(found.length > 0) {
-
-      // }
     }
-    document.querySelector(`#${this.toDoListID}`).innerHTML = '';
+
+    (<HTMLElement> document.querySelector(`#${this.toDoListID}`)).innerHTML = '';
     const render = found.length > 0 ? found : this.list;
     console.log('going to render:', render);
     this.renderAll(render);
@@ -231,8 +225,4 @@ const toDo = new ToDo('search', 'to-do-list', {
   modalCancelID: 'modal-cancel',
 });
 
-// toDo.removeItem(2);
 toDo.renderAll();
-// toDo.processSearch('ber');
-
-// console.log(.push())
